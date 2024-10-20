@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cta2d10ecl3hp"]
+
+[ext_resource type="Script" path="res://scenes/objects/gate.gd" id="1_42uo2"]
+[ext_resource type="Texture2D" uid="uid://bpxlef063qjfh" path="res://graphics/objects/gate.png" id="1_f2mgt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8be5h"]
+size = Vector2(610, 109)
+
+[node name="Gate" type="StaticBody2D"]
+script = ExtResource("1_42uo2")
+
+[node name="GateImage" type="Sprite2D" parent="."]
+scale = Vector2(0.721795, 0.632051)
+texture = ExtResource("1_f2mgt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-353, 327)
+polygon = PackedVector2Array(-682, -819, -683, -1, -683, 13, -680, 36, -672, 58, -661, 80, -654, 91, -638, 110, -607, 134, -586, 146, -565, 155, -544, 160, -518, 164, -503, 165, 88, 164, 86, 0, 707, 0, 708, 164, 1314, 161, 1346, 155, 1374, 146, 1400, 131, 1418, 119, 1434, 104, 1448, 87, 1461, 66, 1470, 42, 1474, 25, 1476, 0, 1478, -820)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(44, 384.5)
+shape = SubResource("RectangleShape2D_8be5h")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
