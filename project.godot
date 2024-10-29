@@ -11,14 +11,29 @@ config_version=5
 [application]
 
 config/name="Shooter"
-run/main_scene="res://scenes/levels/level.tscn"
+run/main_scene="res://scenes/levels/outside.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Globals="*res://globals/globals.gd"
+TransitionLayer="*res://globals/transition_layer.tscn"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
 
 [display]
 
 window/size/viewport_width=854
 window/size/viewport_height=480
+mouse_cursor/custom_image="res://graphics/ui/crosshair159.png"
+mouse_cursor/custom_image_hotspot=Vector2(17, 17)
+
+[global_group]
+
+Entity=""
 
 [input]
 
@@ -58,6 +73,14 @@ down={
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(89, 11),"global_position":Vector2(96, 47),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemies"
+2d_physics/layer_3="Objects"
+2d_physics/layer_4="Projectiles"
+2d_physics/layer_5="Items & Zones"
 
 [rendering]
 

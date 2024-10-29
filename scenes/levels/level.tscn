@@ -1,24 +1,35 @@
 [gd_scene load_steps=4 format=3 uid="uid://b18yvk5m02fb"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_dxk0y"]
-[ext_resource type="PackedScene" uid="uid://cta2d10ecl3hp" path="res://scenes/objects/gate.tscn" id="2_4luij"]
+[ext_resource type="PackedScene" uid="uid://dfqgu20morvik" path="res://scenes/user interfaces/ui.tscn" id="3_aju3t"]
 [ext_resource type="PackedScene" uid="uid://y2gmcynpc55x" path="res://scenes/player/player.tscn" id="3_g7cx2"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_dxk0y")
 
-[node name="Gate" parent="." instance=ExtResource("2_4luij")]
-position = Vector2(359, -313)
+[node name="Decals" type="Node2D" parent="."]
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="Infestation" type="Node2D" parent="."]
+
+[node name="Items" type="Node2D" parent="."]
 
 [node name="Projectiles" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Enemies" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("3_g7cx2")]
 position = Vector2(330, 469)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.6, 0.6)
+zoom = Vector2(0.4, 0.4)
 position_smoothing_enabled = true
 
-[connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("3_aju3t")]
+
 [connection signal="player_grenade_trigger" from="Player" to="." method="_on_player_player_grenade_trigger"]
 [connection signal="player_laser_trigger" from="Player" to="." method="_on_player_player_laser_trigger"]

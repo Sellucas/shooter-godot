@@ -1,18 +1,34 @@
 extends Node2D
+class_name LevelParent
 
 var laser_scene: PackedScene = preload("res://scenes/projectiles/laser.tscn")
 var grenade_scene: PackedScene = preload("res://scenes/projectiles/grenade.tscn")
+var item_scene: PackedScene = preload("res://scenes/items/item.tscn")
 
-func _on_gate_player_entered_gate(body) -> void:
-	print("Entered")
-	print(body)
+func _ready():
+	for container in get_tree().get_nodes_in_group("Container"):
+		container.connect("open", _on_container_opened)
+	for scout in get_tree().get_nodes_in_group("Scouts"):
+		scout.connect("laser", _on_scout_laser)
 
-func _on_player_player_laser_trigger(pos, direction) -> void:
+func _on_container_opened(pos, direction):
+	var item = item_scene.instantiate() as Area2D
+	item.position = pos
+	item.direction = direction
+	$Items.call_deferred("add_child", item)
+	
+func create_laser(pos, direction):
 	var laser = laser_scene.instantiate() as Area2D
 	laser.position = pos
 	laser.rotation = direction.angle()
 	laser.direction = direction
 	$Projectiles.add_child(laser)
+	
+func _on_scout_laser(pos, direction):
+	create_laser(pos, direction)
+
+func _on_player_player_laser_trigger(pos, direction) -> void:
+	create_laser(pos, direction)
 
 func _on_player_player_grenade_trigger(pos, direction) -> void:
 	var grenade = grenade_scene.instantiate() as RigidBody2D
